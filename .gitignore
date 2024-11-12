@@ -1,2 +1,5 @@
 *.csv
 *.rar
+.vscode
+*.ipynb_checkpoints
+test*
