@@ -3,3 +3,6 @@
 .vscode
 *.ipynb_checkpoints
 test*
+price_json/*
+price/*
+*driver*
