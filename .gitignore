@@ -6,3 +6,4 @@ test*
 price_json/*
 price/*
 *driver*
+!vietnamese-stopwords.csv
