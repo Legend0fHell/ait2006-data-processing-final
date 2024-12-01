@@ -14,7 +14,7 @@ giận
 tức giận  
 bực  
 khó chịu  
-chán  
+chán
 tủi thân  
 áp lực  
 hoảng loạn  
@@ -72,7 +72,7 @@ vkl
 súc vật
 con chó
 đĩ
-Đéo
+đéo
 buồi
 buoi
 dau buoi
@@ -234,6 +234,8 @@ ditmecondicho
 đilon
 diloz
 dilol
+mất dậy
+mất dạy
 dilon
 condi
 đĩ mẹ
@@ -288,6 +290,7 @@ chó điên
 thằng điên
 thang dien
 đồ điên
+sủa
 sủa bậy
 sủa tiếp
 sủa đi
