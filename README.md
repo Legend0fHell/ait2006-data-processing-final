@@ -27,3 +27,38 @@
 - Viết tài liệu chương phân tích, mô hình xác suất.
 
 ## Code dẫn chứng
+| Chương | File | Cell |
+| ------ | ---- | ---- |
+| 1.2.1 | crawler.ipynb         | 1-18 |
+| 1.2.2 | crawler_vnstock.ipynb | 1-13 |
+| 1.3   | crawler_indexes.ipynb | 1-5 |
+| 2.1   | basic_analyze.ipynb   | 1 |
+| 2.2.1 | article_analyze.ipynb | 25 |
+| 2.2.2 | article_analyze.ipynb | 29 |
+| 2.2.4 | article_analyze.ipynb | 5 |
+| 2.2.4 | sentiment_v2.ipynb    | 7 |
+| 2.2.5 | article_analyze.ipynb | 11, 12 |
+| 2.2.6 | article_analyze.ipynb | 15, 17 |
+| 2.3.1 | article_analyze.ipynb | 58 |
+| 2.3.2 | article_analyze.ipynb | 60 |
+| 2.3.3 | basic_analyze.ipynb   | 211 |
+| 2.4.1 | article_analyze.ipynb | 63, 65 |
+| 2.4.2 | basic_analyze.ipynb   | 73 |
+| 2.4.3 | basic_analyze.ipynb   | 27 |
+| 2.5.1 | basic_analyze.ipynb   | 189 |
+| 2.5.2 | basic_analyze.ipynb   | 69, 175, 184, 202 |
+| 2.5.3 | dantri_analyze.ipynb  | 8-12, 20-21 |
+| 3.1.1 | article_analyze.ipynb | 67 |
+| 3.1.2 | article_analyze.ipynb | 70 |
+| 3.1.3 | article_analyze.ipynb | 69 |
+| 3.2.1 | article_analyze.ipynb | 31 | 
+| 3.2.2 | article_analyze.ipynb | 46 |
+| 4.1   | article_analyze.ipynb | 37 |
+| 4.2   | basic_analyze.ipynb   | 32 |
+| 4.2   | predictions.ipynb     | 8 |
+| 5.1   | basic_analyze.ipynb   | 82-100 |
+| 5.2   | basic_analyze.ipynb   | 126-133 |
+| 5.3   | sentiment_v2.ipynb    | 1-19 |
+
+
+
