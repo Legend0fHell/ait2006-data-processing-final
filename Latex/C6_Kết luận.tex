@@ -1,0 +1,25 @@
+\chapter*{Tổng kết}
+\addcontentsline{toc}{chapter}{Tổng kết}
+
+Trong bản báo cáo này, nhóm chúng em đã tiến thành thu thập dữ liệu của FireAnt trong khoảng hai tháng, vào thời điểm mà thị trường xảy ra nhiều biến động. Nhóm đã cào được \textbf{272979 bài viết}, cùng với đó là \textbf{75510 bình luận}, được cào từ ngày \textbf{06/9/2024} đến ngày \textbf{06/11/2024}; kết hợp cùng dữ liệu các mã cổ phiếu. Chúng em cũng đã thực hiện việc tiền xử lý và làm sạch dữ liệu, từ đó rút gọn trường dữ liệu, đồng thời, bổ sung thêm dữ liệu về các chỉ số trong nước và quốc tế.\\
+
+Sau đó, chúng em cũng đã đưa ra phân tích, nhận định khái quát những dữ liệu bài đăng và phản hồi, đưa ra giá trị trung vị, giá trị trung bình của số bình luận và bài viết, thống kê được thời gian vàng mà người dùng có lượng tương tác đạt mức kỉ lục cũng như các từ khóa mà người dùng hay nhắc đến. Qua đó, thực hiện đánh giá cộng đồng người dùng FireAnt ta có được thống kê lượng người phản hồi và đăng bài mỗi ngày, tìm ra được sự tương quan của người dùng và số bài đăng cũng như là đánh giá được lượng phản hồi của người dùng. Tỉ lệ bài viết xuất hiện từ thiếu văn minh cũng như tỉ lệ quan điểm tích cực và tiêu cực cũng đã phản ánh được khái quát về văn hóa và tính chất của cộng đồng FireAnt nói riêng và Việt Nam nói chung.\\
+
+Thị trường chứng khoán Việt Nam cũng được phân tích và đánh giá một cách tổng quan, sơ bộ. Nhìn chung, sự phân bố các ngành và các yếu tố như vốn hóa thị trường, số cổ phiếu lưu hành hay là quan điểm người dùng về ngành đã được phân tích và trực quan hóa ở dạng biểu đồ và dataframe, từ đó nhận xét quy mô thị trường của các ngành nước nhà. Trong đó, 3 chỉ số thị trường lớn là \textbf{VNINDEX, VN30 và HNXINDEX có sự tương quan sâu sắc} lẫn nhau cùng với các chỉ số thị trường nước ngoài với những con số vượt ngoài mong đợi.\\
+
+Qua hai phân tich trên về thị trường chứng khoán Việt Nam và FireAnt, điều đầu tiên chúng em rút ra được là xu hướng khối lượng giao dịch có thể tăng do nhà đầu tư chú ý và phản ứng với thông tin hay có xuất hiện sự kiện thu hút dòng vốn mới vào cổ phiếu liên quan, dẫn đến khẳng định rằng khi số lượng bài viết tăng thì khối lượng giao dịch cũng tăng tương ứng. Đồng thời chúng em đã biểu diễn được số lượng bài viết theo phản ứng người dùng khi thị trường biến động mạnh hay yếu được phản ánh bởi các scatter plot giữa phần trăm biến động của VNINDEX và số bài viết, giải thích cho các điểm dị thường trong đồ thị và khẳng định sự tương tác người dùng có sự đồng nhất với biến đổi thị trường (biến đổi cùng mạnh thì tương tác càng nhiều và ngược lại), qua đó khẳng định xu hướng rằng \textbf{khi giá tăng, số lượng bài viết tiêu cực có xu hướng giảm và số lượng bài viết tích cực cũng tăng theo}.\\
+
+Ngoài ra, chúng em cũng đã sử dụng Bayes và xích Markov để ứng dụng vào dự đoán giá trong ngày. Nhìn chung, tuy không thể áp dụng vào để dự đoán chính xác hoàn toàn sự biến động của thị trường trong thực tế, số lượng bài đăng trên diễn đàn không phải nguyên nhân chính khiến giá biến động nhưng có thể được sử dụng như một hình thức tham khảo hoặc loại cảnh báo và có thể kết hợp với các thuật toán phức tạp khác để tăng sự chính xác.\\
+
+Nối bật hơn cả là mô hình học máy phân tích quan điểm dựa trên nội dung bài viết sử dụng Random Forest. Tại đó, với dữ liệu được trích từ toàn bộ 270 nghìn bài viết, chúng em đã phân loại các bài tích cực và tiêu cực, lọc các stopword và split dữ liệu. Thực hiện train lần một, sau đó cải thiện dữ liệu đầu vào và tiến hành train lại lần hai đã có kết quả khả quan hơn với độ chính xác ở mức tương đối tốt \textbf{(76.2\%)}, vậy nên việc có thể áp dụng mô hình vào phân tích quan điểm là khả quan. Chúng em cũng đã đưa ra hướng cải thiện, như thử nhiều phương pháp khác, áp dụng Học sâu, để tăng độ chính xác của mô hình.\\
+
+\subsubsection*{Dự định tương lai}
+Mục tiêu chính của chúng em, không chỉ dừng lại ở đây với tư cách là một bài tập lớn mà sẽ là một dự án đầy đủ, phân tích sâu hơn tâm lý thị trường và xu hướng chung của những nhà đầu tư. Vậy nên trong tương lai, chúng em dự định sẽ cào thêm nhiều dữ liệu, tối ưu mô hình, phân tích sâu sắc hơn để có những số liệu chính xác. Trong quá trình hiện thực hóa ý tưởng này, nhóm chúng em sẽ liên tục cải thiện trình độ của bản thân, cũng như lôi kéo các nguồn lực để phát triển.\\
+
+\large{
+Chúng em chân thành cảm ơn thầy, cô và các độc giả đã dành thời gian để đọc bản báo cáo này của chúng em. Một lần nữa chúng em xin cảm ơn thầy cô về một đề tài mở thú vị, giúp chúng em nâng cao hiểu biết trong lĩnh vực Lập trình Xử lý dữ liệu bằng Python. Nhóm chúng em hi vọng sẽ nhận được những góp ý cũng như phản hồi tích cực từ phía thầy cô.\\ 
+
+\noindent Trân trọng, \\
+
+\noindent Nhóm 7, Đánh đâu lỗ đó.
+}

@@ -1,0 +1,82 @@
+\documentclass[30pt]{report}
+\usepackage[utf8]{vietnam}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{cite}
+\geometry{a4paper, margin=1in}
+\usepackage{amsmath} 
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{url}
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+
+\hypersetup{
+    colorlinks = true,
+    citecolor=blue,
+    filecolor=black,
+    linktoc=all,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    \Large{\textbf{TRƯỜNG ĐẠI HỌC CÔNG NGHỆ - ĐHQGHN}}\\
+    \Large{ \textbf{VIỆN TRÍ TUỆ NHÂN TẠO}}\\
+    
+    \vspace{0.5cm}
+    \rule{0.5\textwidth}{0.4pt}
+
+    \vspace{2cm}
+    \includegraphics[width=5.5cm]{iai-logo.jpg}
+
+    \vspace{1cm}
+    \huge\textbf{LẬP TRÌNH XỬ LÝ DỮ LIỆU}\\
+    \huge\textbf{BÁO CÁO BÀI TẬP LỚN}
+
+    \vspace{2cm}
+    \Large {\textbf{NHÓM 7: ĐÁNH ĐÂU LỖ ĐÓ}}\\
+    \vspace{0.3cm}
+    \Large {\textbf{Phân tích bài viết trên diễn đàn chứng khoán FireAnt và tương quan của diễn đàn với thị trường chứng khoán Việt Nam}}\\
+    
+    \vspace{2.5cm}
+    \begin{tabular}{llr}
+        \textbf{Thành viên nhóm}: & $\text{Phạm Nhật Quang}$ &$\text{23020413}$\\
+                   & $\text{Bùi Minh Quân}$ &$\text{23020415}$\\
+                   & $\text{Phan Quang Trường}$ &$\text{23020443}$\\\end{tabular}
+
+\vspace{1.5cm}
+
+\end{center}
+\end{titlepage}
+
+\include{C0_Lời mở đầu}
+
+\tableofcontents
+\input{C1_Thu thập dữ liệu}
+\input{C2_Phân tích FireAnt}
+\input{C3_Phân tích TTCKVN}
+\input{C4_Tương quan}
+\input{C5_Học máy}
+
+\input{C6_Kết luận}
+
+
+\bibliography{ref}
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\nocite{*}
+\bibliographystyle{plain}
+
+\end{document}
+

@@ -1,0 +1,120 @@
+\chapter{Các kỹ thuật huấn luyện mô hình cải tiến}
+\large {
+\section{Gradient Checkpointing}
+\textcolor{blue}{Gradient Checkpointing}\cite{chen2016trainingdeepnetssublinear}
+là một kỹ thuật giúp giảm thiểu yêu cầu bộ nhớ bằng cách đánh đổi giữa bộ nhớ và độ phức tạp tính toán. Về cơ bản nguyên lý hoạt động chính của \textcolor{blue}{Gradient Checkpointing} gồm 4 phần:
+\begin{enumerate}
+    \item Chia mạng neural thành nhiều phân đoạn.
+    \item Chỉ lưu trữ đầu ra của mỗi phân đoạn.
+    \item Bỏ qua các kết quả trung gian bên trong mỗi phân đoạn.
+    \item Khi lan truyền ngược, tính toán lại các kết quả trung gian bị bỏ qua.
+\end{enumerate}
+
+Ý tưởng chính của thuật toán được thể hiện qua hình A.1 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/gradientgraph.png}
+    \caption{Hình ảnh minh họa ý tưởng của Gradient Checkpointing}
+    \label{fig:your-label}
+\end{figure} 
+Về cơ bản, như trong hình A.1, thuật toán được kỳ vọng biến cấu hình mạng neural của đồ thị các gradient từ trạng thái bình thường về trạng thái tối ưu (hình ngoài cùng bên phải). Chi tiết thuật toán có thể tham khảo trong mục \textbf{Algorithm 1} và \cite{chen2016trainingdeepnetssublinear}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwIn{$G = (V, \text{pred})$, đồ thị tính toán đầu vào, $\text{pred}[v]$ cho mảng các nút tiền nhiệm của nút $v$}
+\KwIn{$\text{gradient}(\text{grad\_kế}, \text{đầu\_ra}, \text{đầu\_vào})$, hàm gradient tượng trưng}
+\KwIn{$m : V \to \mathbb{N}^+$, $m(v)$ cho số lần nút $v$ nên được nhân bản, $m(v) = 0$ nghĩa là không bỏ đầu ra của nút $v$}
+$a[v] \leftarrow v$ với mọi $v \in V$\;
+\For{$k = 1$ \KwTo $\max_{v\in V} m(v)$}{
+    \For{$v$ trong thứ-tự-tô-pô($V$)}{
+        \If{$k \leq m(v)$}{
+            $a[v] \leftarrow \text{nút mới, cùng toán tử với } v$\;
+            $\text{pred}[a[v]] \leftarrow \bigcup_{u\in\text{pred}[v]}\{a[u]\}$\;
+        }
+    }
+}
+$V' \leftarrow \text{thứ-tự-tô-pô}(V)$\;
+\For{$v$ trong thứ-tự-tô-pô-ngược($V$)}{
+    $g[v] \leftarrow \text{gradient}([g[v] \text{ với } v \text{ trong } \text{kế}(v)], a[v], [a[v] \text{ với } v \text{ trong } \text{pred}[v]])$\;
+    $V' \leftarrow \text{nối}(V', \text{thứ-tự-tô-pô}(\text{tổ-tiên}(g[v])) - V')$\;
+}
+\KwOut{$G' = (V', \text{pred})$ đồ thị mới, thứ tự trong $V'$ cho thứ tự thực thi logic}
+\caption{Xây dựng Đồ thị Gradient Tối ưu Bộ nhớ}
+\end{algorithm}
+
+\section{Mixed Precision Training}
+\textcolor{blue}{Mixed Precision Training}\cite{micikevicius2018mixedprecisiontraining} là một kỹ thuật trong học sâu nhằm tăng tốc quá trình huấn luyện và giảm bớt yêu cầu bộ nhớ của mô hình mà vẫn duy trì được độ chính xác. Kỹ thuật này kết hợp sử dụng cả số thực dấu phẩy động độ chính xác đơn \textbf{(FP16)} và độ chính xác kép \textbf{(FP32)} trong quá trình huấn luyện. Lý do ta nên dùng \textcolor{blue}{Mixed Precision Training} bởi vì nó mang lại 2 lợi ích chính của cả \textbf{FP16} và \textbf{FP32} đó là \textbf{nhanh và tối ưu bộ nhớ} với \textbf{FP16} cũng như \textbf{độ chính xác cao} với \textbf{FP32}. Bằng việc sử dụng cả 2 độ chính xác trên cho từng lớp mạng nhất định ta có thể tối ưu được bộ nhớ, băng thông và quá trình tính toán. \\
+
+Để so sánh chi tiết hơn về \textbf{FP16} và \textbf{FP32} ta có hình A.2 và A.3 nêu lên những lợi ích chính của 2 loại độ chính xác này.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/FP16.png}
+    \caption{Lợi ích của \textbf{FP16} so với \textbf{FP32}}
+    \label{fig:your-label}
+\end{figure} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/FP32.png}
+    \caption{Lợi ích của \textbf{FP32} so với \textbf{FP16}}
+    \label{fig:your-label}
+\end{figure} 
+
+Từ những lợi ích trên ta xây dựng được cách tối ưu khi nào sử dụng \textbf{FP16} và khi nào sử dụng \textbf{FP32} như sau:
+\begin{itemize}
+    \item Với các phép nhân ma trận và tích chập sử dụng Tensor Core, ta nên sử dụng \textbf{FP16} vì các phép này này thường có nhiều phép tính dung lượng lớn và độ chính xác yêu cầu cũng không quá cao.
+    \item Sử dụng \textbf{FP16} cho các hàm kích hoạt đơn giản như \textbf{ReLU} hay \textbf{GeLU} do các hàm này cũng không yêu cầu độ chính xác cao để hoạt động tốt.
+    \item Sử dụng \textbf{FP32} cho các bộ trọng số của mô hình, hàm mất mát (loss function) hoặc softmax vì những giá trị này cực kỳ nhạy cảm với độ chính xác.
+\end{itemize}
+Tổng kết lại, ta có hình A.4 để thể hiện thành phần nào nên dùng \textbf{FP16} và thành phần nào nên dùng \textbf{FP32}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/FP16vFP32.png}
+    \caption{Mô tả những trường hợp nên dùng \textbf{FP16} và \textbf{FP32}}
+    \label{fig:your-label}
+\end{figure} 
+Ngoài ra, thực nghiệm cũng cho thấy việc sử dụng \textcolor{blue}{Mixed Precision Training} cũng giúp mô hình cải thiện được một phần độ chính xác, cụ thể như hình A.5:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/precision.png}
+    \caption{So sánh độ chính xác của các mô hình khi sử dụng \textbf{FP32} và \textbf{Mixed Precision}}
+    \label{fig:your-label}
+\end{figure} 
+
+\section{Low-Rank Adaptation}
+\textcolor{blue}{Low-Rank Adaptation} hay còn gọi là \textcolor{blue}{LoRA} là một phương pháp hiệu quả để điều chỉnh các mô hình ngôn ngữ lớn đã được huấn luyện trước cho các tác vụ cụ thể, mà không cần phải tinh chỉnh toàn bộ tham số của mô hình. Ý tưởng chính của \textcolor{blue}{LoRA} gồm:
+\begin{enumerate}
+    \item Giữ nguyên trọng số của mô hình đã huấn luyện trước.
+    \item Thêm các ma trận phân rã hạng thấp (low-rank decomposition matrices) vào mỗi lớp của kiến trúc Transformer.
+    \item Chỉ huấn luyện các ma trận phân rã hạng thấp này cho tác vụ mới.
+\end{enumerate}
+
+Với một ma trận trọng số $W_0 \in \mathbb{R}^{d \times k}$ trong mô hình gốc (hình A.6), LoRA thêm một ma trận cập nhật $\Delta W = BA$, trong đó:
+\begin{itemize}
+    \item $B \in \mathbb{R}^{d \times r}$
+    \item $A \in \mathbb{R}^{r \times k}$
+    \item $r \ll \min(d,k)$ là hạng của ma trận cập nhật
+\end{itemize}
+
+Phép nhân ma trận mới trở thành:
+
+\begin{equation}
+    h = W_0x + \Delta Wx = W_0x + BAx
+\end{equation}
+
+Trong đó $x$ là đầu vào, $h$ là đầu ra. \\
+
+Có thể thấy thay vì cập nhật bộ tham số trên ma trận trọng số gốc $W_0$ rất to, bằng việc sử dụng \textcolor{blue}{LoRA} ta chỉ phải cập nhập trên 2 ma trận con đã được phân rã khác là $A$ và $B$ với kích thước nhỏ hơn rất nhiều, điều này giúp cho ta giảm đáng kể số lượng tham số cần huấn luyện (có thể giảm đến 10,000 lần so với fine-tuning toàn bộ mô hình) cũng như cho phép chuyển đổi nhanh giữa các tác vụ khác nhau bằng cách chỉ thay đổi ma trận $A$ và $B$.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/lora2.png}
+    \caption{Minh họa cơ bản về \textbf{LoRA}}
+    \label{fig:your-label}
+\end{figure} 
+
+}
